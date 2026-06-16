@@ -1,0 +1,27 @@
+class Solution:
+    def countComponents(self, n: int, edges: List[List[int]]) -> int:
+        graph = defaultdict(list)
+        visit = [False] * n
+        res = 0
+
+        for u, v in edges:
+            graph[u].append(v)
+            graph[v].append(u)
+
+        def dfs(node):
+            for n in graph[node]:
+                if not visit[n]:
+                    visit[n] = True
+                    dfs(n)
+
+
+        for i in range(n):
+            if visit[i] == False:
+                visit[i] = True
+                dfs(i)
+                res += 1
+                
+                
+
+        return res
+        
